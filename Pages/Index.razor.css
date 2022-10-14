@@ -1,0 +1,23 @@
+﻿.component-container {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, 300px);
+    padding: 2rem;
+}
+
+.grid-item {
+    max-width: 300px;
+    justify-self: center;
+}
+
+@media (max-width: 500px) {
+    .component-container {
+        margin: 0;
+        padding: 0;
+    }
+
+    .grid-item {
+        justify-self: center;
+        width: 300px;
+    }
+}

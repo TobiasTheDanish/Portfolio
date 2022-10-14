@@ -1,0 +1,77 @@
+﻿.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(calc(300px-2rem), 1fr));
+    grid-template-rows: minmax(150px, 1fr) minmax(50px, 100px);
+    min-width: 300px;
+    min-height: 200px;
+    padding: 1rem;
+}
+
+.dark {
+    background: hsl(204 100% 5%);
+}
+
+a ::deep {
+    color: #d7d7d7;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: rgba(15,30,41,1);
+    color: white;
+}
+
+.item {
+    max-width: calc(300px - 2rem);
+}
+
+.tags {
+    display: grid;
+    grid-row-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(60px,100px));
+    grid-template-rows: repeat(auto-fit, 45px);
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.tag {
+    display: flex;
+    width: fit-content;
+    min-width: 50px;
+    min-height: 40px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+    background: linear-gradient(to right, hsl(270deg 56% 28% / 85%), hsl(209deg 100% 59% / 29%));
+    border-radius: 20px;
+}
+
+.text-wrapper {
+    padding-right: 0;
+    padding-left: 0;
+    margin-bottom: 0.5rem;
+    text-overflow:ellipsis;
+}
+
+.gradient-text {
+    animation: background-pan 20s linear infinite;
+    background: linear-gradient(to right, hsl(150deg 100% 62%), hsl(209deg 100% 59%), hsl(150deg 100% 62%));
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+@keyframes background-pan {
+    from {
+        background-position: 0% center;
+    }
+
+    to {
+        background-position: 200% center;
+    }
+}

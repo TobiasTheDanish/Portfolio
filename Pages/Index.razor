@@ -1,0 +1,39 @@
+﻿@page "/"
+
+@using BlazorWasmTest.Models
+@using BlazorWasmTest.Pages
+@inject HttpClient client
+
+<h3>Welcome!</h3>
+
+@if (projectModels == null || projectModels.Count < 1)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="component-container">
+        @for (int i = 0; i < projectModels.Count(); i++)
+        {
+            <div class="grid-item">
+                <ProjectComponent project="@projectModels[i]"></ProjectComponent>
+            </div>
+            <div class="grid-item">
+                @if (i < projectModels.Count()-1)
+                {
+                    i++;
+                    <ProjectComponent project="@projectModels[i]"></ProjectComponent>
+                }
+            </div>
+        }
+    </div> 
+}
+
+@code {
+    private List<ProjectModel>? projectModels;
+
+    protected override async Task OnInitializedAsync()
+    {
+        projectModels = await client.GetFromJsonAsync<List<ProjectModel>>("data/ProjectModels.json");
+    }
+}

@@ -1,0 +1,28 @@
+﻿@using BlazorWasmTest.Models
+
+@if (project == null)
+{
+    <p>Project template not found...</p>
+}
+else
+{
+    <a class="grid-container dark" href="@project.Name">
+        <div class="item text-wrapper gradient-text">
+            <h2>@project.Name</h2>
+            <p>@project.Description</p>
+        </div>
+        <div class="item tags">
+            @foreach (string tag in project.Tags)
+            {
+                <div class="tag">
+                    @tag
+                </div>
+            }
+        </div>
+    </a>
+}
+
+@code {
+    [Parameter]
+    public ProjectModel? project { get; set; }
+}
