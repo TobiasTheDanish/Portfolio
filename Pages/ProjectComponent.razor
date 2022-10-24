@@ -1,4 +1,5 @@
 ﻿@using BlazorWasmTest.Models
+@inject NavigationManager navManager
 
 @if (project == null)
 {
@@ -6,23 +7,27 @@
 }
 else
 {
-    <a class="grid-container dark" href="@project.Name">
-        <div class="item text-wrapper gradient-text">
-            <h2>@project.Name</h2>
-            <p>@project.Description</p>
-        </div>
-        <div class="item tags">
-            @foreach (string tag in project.Tags)
-            {
-                <div class="tag">
-                    @tag
-                </div>
-            }
+    <a class="card-container" href="/projects/@Index">
+        <div class="card-content">
+            <div class="item text-wrapper gradient-text">
+                <h2>@project.Name</h2>
+                <p>@project.ShortDescription</p>
+            </div>
+            <div class="item tags">
+                @foreach (string tag in project.Tags ?? new String[0])
+                {
+                    <div class="tag">
+                        @tag
+                    </div>
+                }
+            </div>
         </div>
     </a>
 }
 
 @code {
+    [Parameter]
+    public int Index { get; set; }
     [Parameter]
     public ProjectModel? project { get; set; }
 }

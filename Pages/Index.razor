@@ -1,5 +1,8 @@
 ﻿@page "/"
 
+@using System.Net.Http
+@using System.Text.Json
+@using System.Threading.Tasks
 @using BlazorWasmTest.Models
 @using BlazorWasmTest.Pages
 @inject HttpClient client
@@ -16,14 +19,7 @@ else
         @for (int i = 0; i < projectModels.Count(); i++)
         {
             <div class="grid-item">
-                <ProjectComponent project="@projectModels[i]"></ProjectComponent>
-            </div>
-            <div class="grid-item">
-                @if (i < projectModels.Count()-1)
-                {
-                    i++;
-                    <ProjectComponent project="@projectModels[i]"></ProjectComponent>
-                }
+                <ProjectComponent Index="i" project="@projectModels[i]"></ProjectComponent>
             </div>
         }
     </div> 
@@ -34,8 +30,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(2000);
+        var jsonStream = await client.GetStreamAsync("data/ProjectModels.json");
 
-        projectModels = await client.GetFromJsonAsync<List<ProjectModel>>("data/ProjectModels.json");
+        projectModels = await JsonSerializer.DeserializeAsync<List<ProjectModel>>(jsonStream);
     }
 }
