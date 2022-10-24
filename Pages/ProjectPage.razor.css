@@ -1,0 +1,21 @@
+﻿body {
+}
+
+.tags {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.tag {
+    display: flex;
+    width: fit-content;
+    min-width: 50px;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    background: linear-gradient(to right, hsl(270deg 56% 28% / 85%), hsl(209deg 100% 59% / 29%));
+    border-radius: 20px;
+    margin-left: 1rem;
+}

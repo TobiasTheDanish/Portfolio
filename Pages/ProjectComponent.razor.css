@@ -1,11 +1,36 @@
-﻿.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(calc(300px-2rem), 1fr));
-    grid-template-rows: minmax(150px, 1fr) minmax(50px, 100px);
-    min-width: 300px;
-    min-height: 200px;
-    padding: 1rem;
+﻿.card-container {
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
+
+    .card-container:before {
+        background: linear-gradient(135deg, rgb(10,10,10) 0% 33%, rgb(98, 0, 234) 66%, rgb(206, 34, 92) 83.5%, rgb(195,136,8) 100%);
+        background-size: 400%, 400%;
+        background-position: 0%, 0%;
+        transition: background-position, 350ms ease;
+        position: absolute;
+        content: "";
+        width: 270px;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+        border: 0.5vmin solid rgb(3, 169, 244);
+        overflow: hidden;
+    }
+
+    .card-container:hover:before {
+        background-position: 100%, 100%;
+        transform: scale(1.08, 1.03);
+        border: none;
+    }
+
+    .card-container:hover > .card-content {
+        background-position: -20% 0%;
+        background-size: 2.5vmin 2.5vmin;
+    }
 
 .dark {
     background: hsl(204 100% 5%);
@@ -17,9 +42,20 @@ a ::deep {
     text-decoration: none;
 }
 
-a:hover {
-    background-color: rgba(15,30,41,1);
-    color: white;
+.card-content {
+    display: grid;
+    grid-template-rows: minmax(150px, 1fr) minmax(100px, 1fr);
+    background-image: radial-gradient( rgba(255, 255, 255, 0.2) 4%, transparent 8% );
+    background-position: 0% 0%;
+    background-size: 3vmin 3vmin;
+    padding: 1rem 1rem;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    transition: background-position 350ms ease;
+    transition: background-size 350ms ease;
+    z-index: 2;
 }
 
 .item {

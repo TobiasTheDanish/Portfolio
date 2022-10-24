@@ -1,14 +1,14 @@
 ﻿[
-    {
-      "Name": "Pong in Processing",
-      "Description": "I recreated Pong in the java framework \"Processing\", as a school project for my education",
-      "Tags": [
-        "Java",
-        "Processing",
-        "Pong",
-        "Game development"
-      ]
-    },
+  {
+    "Name": "Pong in Processing",
+    "Description": "I recreated Pong in the java framework \"Processing\", as a school project for my education",
+    "Tags": [
+      "Java",
+      "Processing",
+      "Pong",
+      "Game development"
+    ]
+  },
   {
     "Name": "Test2",
     "Description": "This is a description of Test2",
@@ -20,11 +20,9 @@
   },
   {
     "Name": "Test3",
-    "Description": "This is a description of Test3",
+    "Description": "This is a description of Test3.",
     "Tags": [
-      "HTML",
-      "CSS",
-      "JS"
+      "C#"
     ]
   },
   {
@@ -81,5 +79,5 @@
       "JS"
     ]
   }
-  ]
+]
 

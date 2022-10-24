@@ -4,18 +4,21 @@
     {
         public string? Name { get; set; }
         public string? Description { get; set; }
+        public string? ShortDescription { get; set; }
         public string[]? Tags { get; set; }
 
         public ProjectModel(string? name, string? description, string[]? tags)
         {
             Name = name;
+            Description = description;
+
             if (description != null && description.Length > 50)
             {
-                Description = description.Substring(0, 50).TrimEnd() + "...";
+                ShortDescription = description.Substring(0, 50).TrimEnd() + "...";
             }
             else
             {
-                Description = description;
+                ShortDescription = description;
             }
 
             Tags = tags;

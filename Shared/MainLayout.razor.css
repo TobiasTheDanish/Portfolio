@@ -13,6 +13,10 @@
     display: flex;
     flex-direction: column;
     color: white;
+    background-color: rgb(10,10,10);
+}
+
+.gradient-bg {
     --bgg1: rgb(98, 0, 234);
     --bgg2: rgb(206, 34, 92);
     animation: background-pan 10s linear infinite;
