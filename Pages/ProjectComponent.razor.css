@@ -10,7 +10,8 @@
         background: linear-gradient(135deg, rgb(10,10,10) 0% 33%, rgb(98, 0, 234) 66%, rgb(206, 34, 92) 83.5%, rgb(195,136,8) 100%);
         background-size: 400%, 400%;
         background-position: 0%, 0%;
-        transition: background-position, 350ms ease;
+        transform: scale(1, 1);
+        transition: transform 350ms, border 350ms, background-position 350ms ease;
         position: absolute;
         content: "";
         width: 270px;
@@ -25,32 +26,29 @@
         background-position: 100%, 100%;
         transform: scale(1.08, 1.03);
         border: none;
+        transition-delay: 350ms;
     }
 
     .card-container:hover > .card-content {
         background-position: -20% 0%;
         background-size: 2.5vmin 2.5vmin;
+        transition-delay: 250ms;
     }
 
-    .card-container:hover > .card-content > .item > .card-title > .card-title-word {
+    .card-container:hover > .card-content > .card-title > .card-title-word {
         opacity: 0;
         transition: opacity 10ms cubic-bezier(.90, .06, .15, .90);
     }
 
-    .card-container:hover > .card-content > .item > .card-subtitle > .card-subtitle-word {
+    .card-container:hover > .card-content > .card-subtitle > .card-subtitle-word {
         opacity: 1;
         transform: translate(0%, 0%);
         transition: opacity 0ms, transform 200ms cubic-bezier(.90, .06, .15, .90);
     }
 
-    .card-container:hover > .card-content > .item > .card-subtitle {
-        transform: translate(0%, -50%);
-        transition: transform 200ms cubic-bezier(.90, .06, .15, .90);
-    }
-
     .card-container:hover > .card-content > .tags > .tag {
         opacity: 1;
-        transform: translateX(0%);
+        transform: translateY(0%);
         transition: opacity 0ms, transform 350ms cubic-bezier(.90, .06, .15, .90);
     }
 
@@ -65,8 +63,8 @@ a ::deep {
 }
 
 .card-content {
-    display: grid;
-    grid-template-rows: minmax(150px, 1fr) 100px;
+    display: flex;
+    flex-direction:column;
     background-image: radial-gradient( rgba(255, 255, 255, 0.2) 4%, transparent 8% );
     background-position: 0% 0%;
     background-size: 3vmin 3vmin;
@@ -84,6 +82,7 @@ a ::deep {
 }
 
 .tags {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     row-gap: 5px;
@@ -91,6 +90,7 @@ a ::deep {
     justify-content: flex-start;
     align-items: center;
     margin-top: 0.5rem;
+    height: fit-content;
 }
 
 .tag {
@@ -104,7 +104,7 @@ a ::deep {
     padding: 0 5px;
     background: linear-gradient(to right, hsl(270deg 56% 28% / 85%), hsl(209deg 100% 59% / 29%));
     border-radius: 20px;
-    transform: translateX(80%);
+    transform: translateY(-30%);
     opacity: 0;
     transition: none;
 }
@@ -122,6 +122,8 @@ a ::deep {
     padding-left: 0;
     margin-bottom: 0.5rem;
     text-overflow: ellipsis;
+    height: 50%;
+    width: 100%;
 }
 
 .gradient-text {
@@ -141,6 +143,7 @@ a ::deep {
 }
 
 .card-title {
+    position: absolute;
     font-size: 5.5vmin;
 }
 
@@ -152,9 +155,13 @@ a ::deep {
 }
 
 .card-subtitle {
+    position: relative;
     font-size: 2.5vmin;
     margin-top: 0.5vmin;
-    transition-delay: 500ms;
+    margin-bottom: 2rem;
+    transition: none;
+    top: 5%;
+    transform: translate(0%, 0%);
 }
 
 .card-subtitle-word {
@@ -162,7 +169,7 @@ a ::deep {
     margin: 0vmin 0.3vmin;
     opacity: 0;
     position: relative;
-    transform: translate(40%, 10%);
+    transform: translate(0%, -15%);
     transition: none;
 }
 

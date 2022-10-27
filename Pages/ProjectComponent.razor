@@ -9,7 +9,7 @@ else
 {
     <a class="card-container" href="/projects/@Index">
         <div class="card-content">
-            <div class="item text-wrapper">
+            
                 <h2 class="card-title">
                     @for (int i = 0; i < titleWords?.Length; i++)
                     {
@@ -21,18 +21,18 @@ else
                 <p class="card-subtitle" style="transition-delay: 500ms">
                     @for (int i = 0; i < subtitleWords?.Length; i++)
                     {
-                        string delay = $"{i * 40}ms";
+                        string delay = $"{i * 100 + cardContainerDelay}ms";
                         <span class="card-subtitle-word" style="transition-delay: @delay">@subtitleWords[i]</span>
                     }
                 </p>
-            </div>
+            
             <div class="item tags">
                 @for (int i = 0; i < project.Tags?.Length; i++)
                 {
-                    int index = i + 1;
-                    string delayMs = $"{index*100}ms";
+                    int index = i + subtitleWords.Length;
+                    string delayMs = $"{index * 100 + cardContainerDelay}ms";
                     <div class="tag" style="transition-delay: @delayMs">
-                        <p>@project.Tags[i];</p>
+                        <p>@project.Tags[i]</p>
                     </div>
                 }
             </div>
@@ -47,28 +47,16 @@ else
     public ProjectModel? project { get; set; }
     string[]? titleWords;
     string[]? subtitleWords;
+    int cardContainerDelay = 0;
+    string cardContainerDelayStr = "";
 
     protected override void OnInitialized()
     {
         titleWords = GetTitleWords();
         subtitleWords = GetSubtitleWords();
+        cardContainerDelay = titleWords.Length * 100 + 50;
+        cardContainerDelayStr = $"{cardContainerDelay}ms";
     }
-
-    /*
-    IJSObjectReference? module;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/CreateSubtitle.js");
-
-            if (module is not null) 
-            {
-                subtitleWords = await module.InvokeAsync<string[]>("createSubtitle", project?.ShortDescription, Index);
-            }
-        }
-    } */
 
     private string[] GetSubtitleWords()
     {
