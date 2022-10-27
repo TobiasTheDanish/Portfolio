@@ -10,7 +10,8 @@
         background: linear-gradient(135deg, rgb(10,10,10) 0% 33%, rgb(98, 0, 234) 66%, rgb(206, 34, 92) 83.5%, rgb(195,136,8) 100%);
         background-size: 400%, 400%;
         background-position: 0%, 0%;
-        transition: background-position, 350ms ease;
+        transform: scale(1, 1);
+        transition: transform 350ms, border 350ms, background-position 350ms ease;
         position: absolute;
         content: "";
         width: 270px;
@@ -25,16 +26,35 @@
         background-position: 100%, 100%;
         transform: scale(1.08, 1.03);
         border: none;
+        transition-delay: 350ms;
     }
 
     .card-container:hover > .card-content {
         background-position: -20% 0%;
         background-size: 2.5vmin 2.5vmin;
+        transition-delay: 250ms;
     }
 
-.dark {
-    background: hsl(204 100% 5%);
-}
+    .card-container:hover > .card-content > .card-title > .card-title-word {
+        opacity: 0;
+        transition: opacity 10ms cubic-bezier(.90, .06, .15, .90);
+    }
+
+    .card-container:hover > .card-content > .card-subtitle > .card-subtitle-word {
+        opacity: 1;
+        transform: translate(0%, 0%);
+        transition: opacity 0ms, transform 200ms cubic-bezier(.90, .06, .15, .90);
+    }
+
+    .card-container:hover > .card-content > .tags > .tag {
+        opacity: 1;
+        transform: translateY(0%);
+        transition: opacity 0ms, transform 350ms cubic-bezier(.90, .06, .15, .90);
+    }
+
+    .dark {
+        background: hsl(204 100% 5%);
+    }
 
 a ::deep {
     color: #d7d7d7;
@@ -43,8 +63,8 @@ a ::deep {
 }
 
 .card-content {
-    display: grid;
-    grid-template-rows: minmax(150px, 1fr) minmax(100px, 1fr);
+    display: flex;
+    flex-direction:column;
     background-image: radial-gradient( rgba(255, 255, 255, 0.2) 4%, transparent 8% );
     background-position: 0% 0%;
     background-size: 3vmin 3vmin;
@@ -53,8 +73,7 @@ a ::deep {
     height: 100%;
     width: 100%;
     position: relative;
-    transition: background-position 350ms ease;
-    transition: background-size 350ms ease;
+    transition: background-position 350ms, background-size 350ms ease;
     z-index: 2;
 }
 
@@ -63,14 +82,15 @@ a ::deep {
 }
 
 .tags {
-    display: grid;
-    grid-row-gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(60px,100px));
-    grid-template-rows: repeat(auto-fit, 45px);
-    justify-content: center;
-    justify-items: center;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    column-gap: 20px;
+    justify-content: flex-start;
     align-items: center;
     margin-top: 0.5rem;
+    height: fit-content;
 }
 
 .tag {
@@ -84,13 +104,26 @@ a ::deep {
     padding: 0 5px;
     background: linear-gradient(to right, hsl(270deg 56% 28% / 85%), hsl(209deg 100% 59% / 29%));
     border-radius: 20px;
+    transform: translateY(-30%);
+    opacity: 0;
+    transition: none;
+}
+
+.tag > p {
+    color: white;
+    font-family: "Anek Latin", sans-serif;
+    font-weight: 400;
+    font-size: 2vmin;
+    margin: 0;
 }
 
 .text-wrapper {
     padding-right: 0;
     padding-left: 0;
     margin-bottom: 0.5rem;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
+    height: 50%;
+    width: 100%;
 }
 
 .gradient-text {
@@ -99,6 +132,45 @@ a ::deep {
     background-size: 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.card-title,
+.card-subtitle {
+    color: white;
+    font-family: "Anek Latin", sans-serif;
+    font-weight: 400;
+    margin: 0px;
+}
+
+.card-title {
+    position: absolute;
+    font-size: 5.5vmin;
+}
+
+.card-title-word {
+    display: inline-block;
+    margin: 0vmin 0.6vmin;
+    position: relative;
+    transform: translate(0%, 10%);
+}
+
+.card-subtitle {
+    position: relative;
+    font-size: 2.5vmin;
+    margin-top: 0.5vmin;
+    margin-bottom: 2rem;
+    transition: none;
+    top: 5%;
+    transform: translate(0%, 0%);
+}
+
+.card-subtitle-word {
+    display: inline-block;
+    margin: 0vmin 0.3vmin;
+    opacity: 0;
+    position: relative;
+    transform: translate(0%, -15%);
+    transition: none;
 }
 
 

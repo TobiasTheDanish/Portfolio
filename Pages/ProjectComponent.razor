@@ -1,5 +1,5 @@
 ﻿@using BlazorWasmTest.Models
-@inject NavigationManager navManager
+@inject IJSRuntime JS
 
 @if (project == null)
 {
@@ -9,15 +9,30 @@ else
 {
     <a class="card-container" href="/projects/@Index">
         <div class="card-content">
-            <div class="item text-wrapper gradient-text">
-                <h2>@project.Name</h2>
-                <p>@project.ShortDescription</p>
-            </div>
+            
+                <h2 class="card-title">
+                    @for (int i = 0; i < titleWords?.Length; i++)
+                    {
+                        int multiplier = titleWords.Length - i;
+                        string delay = $"{multiplier * 100}ms";
+                        <span class="card-title-word" style="transition-delay: @delay">@titleWords[i]</span>
+                    }
+                    </h2>
+                <p class="card-subtitle" style="transition-delay: 500ms">
+                    @for (int i = 0; i < subtitleWords?.Length; i++)
+                    {
+                        string delay = $"{i * 100 + cardContainerDelay}ms";
+                        <span class="card-subtitle-word" style="transition-delay: @delay">@subtitleWords[i]</span>
+                    }
+                </p>
+            
             <div class="item tags">
-                @foreach (string tag in project.Tags ?? new String[0])
+                @for (int i = 0; i < project.Tags?.Length; i++)
                 {
-                    <div class="tag">
-                        @tag
+                    int index = i + subtitleWords.Length;
+                    string delayMs = $"{index * 100 + cardContainerDelay}ms";
+                    <div class="tag" style="transition-delay: @delayMs">
+                        <p>@project.Tags[i]</p>
                     </div>
                 }
             </div>
@@ -30,4 +45,26 @@ else
     public int Index { get; set; }
     [Parameter]
     public ProjectModel? project { get; set; }
+    string[]? titleWords;
+    string[]? subtitleWords;
+    int cardContainerDelay = 0;
+    string cardContainerDelayStr = "";
+
+    protected override void OnInitialized()
+    {
+        titleWords = GetTitleWords();
+        subtitleWords = GetSubtitleWords();
+        cardContainerDelay = titleWords.Length * 100 + 50;
+        cardContainerDelayStr = $"{cardContainerDelay}ms";
+    }
+
+    private string[] GetSubtitleWords()
+    {
+        return project?.ShortDescription?.Split(" ") ?? new string[0];
+    }
+    
+    private string[] GetTitleWords()
+    {
+        return project?.Name?.Split(" ") ?? new string[0];
+    }
 }
