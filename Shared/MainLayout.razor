@@ -1,13 +1,53 @@
 ﻿@inherits LayoutComponentBase
 
+@inject IJSRuntime JS
+
 <div class="page">
-    <div class="sidebar">
+<!--
+<div class="sidebar">
         <NavMenu />
     </div>
+-->
+        
+    <main class="dark gradient-bg">
+        <div id="tiles" style="--columns:@columns; --rows:@rows;">
+            @for (int i = 0; i < columns * rows; i++)
+            {
+                <div class="tile"></div>
+            }
+        </div>
 
-    <main class="dark">
         <article class="content px-4">
             @Body
         </article>
     </main>
 </div>
+
+
+
+@code {
+    int columns = 0;
+    int rows = 0;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await CalcColumnsAndRows();
+    }
+
+    [JSInvokable]
+    private async Task CalcColumnsAndRows()
+    {
+        var dimension = await JS.InvokeAsync<WindowDimension>("getWindowDimensions");
+
+        int size = dimension.Width > 800 ? 100 : 50;
+
+        columns = dimension.Width / size;
+        rows = dimension.Height / size;
+    }
+
+    public class WindowDimension
+    {
+        public int Width { get; set; }
+        public int Height { get; set; }
+    }
+}

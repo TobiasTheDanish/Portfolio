@@ -6,8 +6,7 @@
 @using BlazorWasmTest.Models
 @using BlazorWasmTest.Pages
 @inject HttpClient client
-
-<h3>Welcome!</h3>
+@inject IJSRuntime JS
 
 @if (projectModels == null || projectModels.Count < 1)
 {
@@ -28,10 +27,36 @@ else
 @code {
     private List<ProjectModel>? projectModels;
 
+    int columns = 0;
+    int rows = 0;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await CalcColumnsAndRows();
+    }
+    
     protected override async Task OnInitializedAsync()
     {
         var jsonStream = await client.GetStreamAsync("data/ProjectModels.json");
 
         projectModels = await JsonSerializer.DeserializeAsync<List<ProjectModel>>(jsonStream);
     }
+
+    private async Task CalcColumnsAndRows()
+    {
+        var dimension = await JS.InvokeAsync<WindowDimension>("getWindowDimensions");
+
+        int size = dimension.Width > 800 ? 100 : 50;
+
+        columns = dimension.Width / size;
+        rows = dimension.Height / size;
+    }
+
+    public class WindowDimension
+    {
+        public int Width { get; set; }
+        public int Height { get; set; }
+    }
+
 }
