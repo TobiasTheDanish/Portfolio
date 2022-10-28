@@ -1,4 +1,8 @@
 /* /Pages/Index.razor.rz.scp.css */
+.title[b-hqaf5dslmb] {
+    color: white;
+}
+
 .component-container[b-hqaf5dslmb] {
     display: grid;
     grid-gap: 1rem;
@@ -12,6 +16,27 @@
     height: 400px;
     padding: 15px;
 }
+
+#tiles[b-hqaf5dslmb] {
+    height: calc(100vh - 1px);
+    width: calc(100vw - 1px);
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(var(--columns), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
+}
+
+.tile[b-hqaf5dslmb] {
+    position: relative;
+}
+
+    .tile[b-hqaf5dslmb]:before {
+        background-color: rgb(15, 15, 15);
+        content: "";
+        inset: 0.5px;
+        position: absolute;
+    }
 
 @media (max-width: 500px) {
     .component-container[b-hqaf5dslmb] {
@@ -238,12 +263,36 @@ body[b-5ono59kypz] {
     }
 }
 
+#tiles[b-puqnn7dxlr] {
+    top: 1px;
+    height: calc(100vh - 2px);
+    width: calc(100vw - 1px);
+    position: fixed;
+    background: transparent;
+    z-index: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--columns), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
+}
+
+.tile[b-puqnn7dxlr] {
+    position: relative;
+}
+
+    .tile[b-puqnn7dxlr]:before {
+        background-color: rgb(15, 15, 15);
+        content: "";
+        inset: 0.5px;
+        position: absolute;
+    }
+
 .page[b-puqnn7dxlr] {
     position: relative;
     display: flex;
     flex-direction: column;
     color: white;
     background-color: rgb(10,10,10);
+    height: 100vh;
 }
 
 .gradient-bg[b-puqnn7dxlr] {
@@ -251,7 +300,6 @@ body[b-5ono59kypz] {
     --bgg2: rgb(206, 34, 92);
     animation: background-pan-b-puqnn7dxlr 10s linear infinite;
     background: linear-gradient(to right, var(--bgg1), var(--bgg2), var(--bgg1));
-    background-color: rgba(0,0,0,0.4);
     background-size: 200%;
 }
 
@@ -262,11 +310,26 @@ body[b-5ono59kypz] {
 }
 
 main[b-puqnn7dxlr] {
-    flex: 1;
+    top: -1px;
+    height: 102vh;
+    width: 102vw;
+    position: fixed;
+    overflow: scroll;
+    padding: 0 !important;
 }
 
 .sidebar[b-puqnn7dxlr] {
     background-color: rgba(0,0,0,0.8)
+}
+
+.content[b-puqnn7dxlr] {
+    position: absolute;
+    top: 0.5%;
+    left: 0.5%;
+    width: 99%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
 }
 
 .top-row[b-puqnn7dxlr] {
