@@ -8,12 +8,36 @@
     }
 }
 
+#tiles {
+    top: 1px;
+    height: calc(100vh - 2px);
+    width: calc(100vw - 1px);
+    position: fixed;
+    background: transparent;
+    z-index: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--columns), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
+}
+
+.tile {
+    position: relative;
+}
+
+    .tile:before {
+        background-color: rgb(15, 15, 15);
+        content: "";
+        inset: 0.5px;
+        position: absolute;
+    }
+
 .page {
     position: relative;
     display: flex;
     flex-direction: column;
     color: white;
     background-color: rgb(10,10,10);
+    height: 100vh;
 }
 
 .gradient-bg {
@@ -21,7 +45,6 @@
     --bgg2: rgb(206, 34, 92);
     animation: background-pan 10s linear infinite;
     background: linear-gradient(to right, var(--bgg1), var(--bgg2), var(--bgg1));
-    background-color: rgba(0,0,0,0.4);
     background-size: 200%;
 }
 
@@ -32,11 +55,26 @@
 }
 
 main {
-    flex: 1;
+    top: -1px;
+    height: 102vh;
+    width: 102vw;
+    position: fixed;
+    overflow: scroll;
+    padding: 0 !important;
 }
 
 .sidebar {
     background-color: rgba(0,0,0,0.8)
+}
+
+.content {
+    position: absolute;
+    top: 0.5%;
+    left: 0.5%;
+    width: 99%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
 }
 
 .top-row {
