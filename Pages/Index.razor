@@ -32,8 +32,9 @@ else
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (firstRender)        
             await CalcColumnsAndRows();
+
     }
     
     protected override async Task OnInitializedAsync()

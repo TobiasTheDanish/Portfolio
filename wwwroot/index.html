@@ -20,8 +20,17 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    <script src="js/Scripts.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script src="js/Scripts.js"></script>
+    <script>
+        let dotNetObject;
+
+        window.setDotNetRef = (objRef) => {
+            dotNetObject = objRef;
+        };
+
+        window.addEventListener("resize", async () => await dotNetObject.invokeMethodAsync('CalcColsAndRows'));
+    </script>
 </body>
 
 </html>
