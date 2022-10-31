@@ -26,23 +26,34 @@
 
 
 @code {
-    int columns = 0;
-    int rows = 0;
+    int columns;
+    int rows;
 
     protected override async Task OnParametersSetAsync()
     {
+        var objRef = DotNetObjectReference.Create(this);
+        await JS.InvokeVoidAsync("setDotNetRef", objRef);
+
         await CalcColumnsAndRows();
     }
 
-    [JSInvokable]
-    private async Task CalcColumnsAndRows()
+    [JSInvokable("CalcColsAndRows")]
+    public async Task CalcColumnsAndRows()
     {
+        int currentColumns = this.columns;
+        int currentRows = this.rows;
+
         var dimension = await JS.InvokeAsync<WindowDimension>("getWindowDimensions");
 
         int size = dimension.Width > 800 ? 100 : 50;
 
-        columns = dimension.Width / size;
-        rows = dimension.Height / size;
+        this.columns = dimension.Width / size;
+        this.rows = dimension.Height / size;
+
+        if (this.columns != currentColumns || this.rows != currentRows)
+        {
+            StateHasChanged();
+        }
     }
 
     public class WindowDimension
