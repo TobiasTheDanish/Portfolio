@@ -25,10 +25,18 @@
 }
 
     .tile:before {
-        background-color: rgb(15, 15, 15);
+        background-color: hsl(270 47% 9%);
         content: "";
-        inset: 0.5px;
+        inset: 1px;
         position: absolute;
+        transition: inset 400ms ease;
+        transition-delay: 200ms;
+    }
+
+    .tile:hover:before {
+        z-index: 1;
+        inset: 5px;
+        transition: inset 50ms ease;
     }
 
 .page {
@@ -72,8 +80,8 @@ main {
     top: 0.5%;
     left: 0.5%;
     width: 99%;
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
     background: transparent;
 }
 

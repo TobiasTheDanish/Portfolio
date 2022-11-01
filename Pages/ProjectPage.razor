@@ -3,14 +3,24 @@
 @using BlazorWasmTest.Models
 @inject HttpClient client
 
-<h3>@Project?.Name</h3>
-<div class="tags">
-    @foreach (var tag in Project?.Tags ?? new String[0])
-    {
-        <div class="tag">@tag</div>
-    }
+<div class="content-wrapper ">
+    <div class="title-bg ">
+        <h3 class="title">@Project?.Name</h3>
+    </div>
+    <div class="tags">
+        @foreach (var tag in Project?.Tags ?? new String[0])
+        {
+            <div class="tag">@tag</div>
+        }
+    </div>
+    <p class="description">
+        @for (int i = 0; i < descriptionWords?.Length; i++)
+        {
+            string delayMs = $"{i * 40}ms";
+            <span class="description-word" style="transition-delay: @delayMs">@descriptionWords[i]</span>
+        }
+    </p>
 </div>
-<p> @Project?.Description</p>
 
 @code {
     [Parameter]
@@ -18,10 +28,13 @@
 
     public ProjectModel? Project { get; set; }
 
+    private string[]? descriptionWords;
+
     protected override async Task OnInitializedAsync()
     {
         var projectModels = await client.GetFromJsonAsync<List<ProjectModel>>("data/ProjectModels.json");
 
         Project = projectModels?[Id];
+        descriptionWords = Project?.Description?.Split(' ') ?? new string[0];
     }
 }
