@@ -29,15 +29,27 @@
         content: "";
         inset: 1px;
         position: absolute;
-        transition: inset 400ms ease;
-        transition-delay: 200ms;
+        animation: tileAnim 10s linear infinite;
+        animation-delay: var(--animDelay);
     }
 
-    .tile:hover:before {
+/*.tile:hover:before {
         z-index: 1;
         inset: 5px;
         transition: inset 50ms ease;
+    }*/
+
+@keyframes tileAnim{
+    0% {
+        inset: 1px;
     }
+    10% {
+        inset: 5px;
+    }
+    20% {
+        inset: 1px;
+    }
+}
 
 .page {
     position: relative;

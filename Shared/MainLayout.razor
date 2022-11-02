@@ -11,9 +11,13 @@
         
     <main class="dark gradient-bg">
         <div id="tiles" style="--columns:@columns; --rows:@rows;">
-            @for (int i = 0; i < columns * rows; i++)
+            @for (int i = 0; i < rows; i++)
             {
-                <div class="tile"></div>
+                @for (int j = 0; j < columns; j++)
+                {
+                    string animDelay = $"{(i+j) * 250}ms";
+                    <div class="tile" style=" --animDelay: @animDelay;"></div>
+                }
             }
         </div>
 
