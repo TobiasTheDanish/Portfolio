@@ -1,11 +1,10 @@
 ﻿[
   {
     "Name": "Pong in Processing",
-    "Description": "I recreated Pong in the java framework \"Processing\", as a school project for my education",
+    "Description": "I recreated Pong in the java framework \"Processing\", as an early school project.\nThe game is made with a focus on applying OOP principles and basic programming skillsets.\nI created menus from scratch, as a way to challenge my creativity and coding skills.",
     "Tags": [
       "Java",
       "Processing",
-      "Pong",
       "Game development"
     ]
   },
