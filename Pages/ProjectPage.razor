@@ -14,10 +14,16 @@
         }
     </div>
     <p class="description">
-        @for (int i = 0; i < descriptionWords?.Length; i++)
+        @for (int i = 0; i < descriptionSections?.Length; i++)
         {
-            string delayMs = $"{i * 40}ms";
-            <span class="description-word" style="transition-delay: @delayMs">@descriptionWords[i]</span>
+            string[] descriptionWords = descriptionSections[i].Split(' ');
+            <div class="description-section">
+                @for (int w = 0; w < descriptionWords.Length; w++)
+                {
+                    string delayMs = $"{i * 40}ms";
+                    <span class="description-word" style="transition-delay: @delayMs; opacity: @wordOpacity;">@descriptionWords[w]</span>
+                }
+            </div>
         }
     </p>
 </div>
@@ -28,13 +34,19 @@
 
     public ProjectModel? Project { get; set; }
 
-    private string[]? descriptionWords;
+    private string[]? descriptionSections;
+    int wordOpacity = 0;
 
     protected override async Task OnInitializedAsync()
     {
         var projectModels = await client.GetFromJsonAsync<List<ProjectModel>>("data/ProjectModels.json");
 
         Project = projectModels?[Id];
-        descriptionWords = Project?.Description?.Split(' ') ?? new string[0];
+        descriptionSections = Project?.Description?.Split("\n") ?? new string[0];
+    }
+
+    protected override void OnParametersSet()
+    {
+        wordOpacity = 1;
     }
 }
