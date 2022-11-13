@@ -27,7 +27,7 @@
     .tile:before {
         background-color: hsl(270 47% 9%);
         content: "";
-        inset: 0px;
+        inset: 1px;
         position: absolute;
         animation: tileAnim 15s linear infinite;
         animation-delay: var(--animDelay);
@@ -41,14 +41,14 @@
     }*/
 
 @keyframes tileAnim{
-    0% {
-        inset: 0px;
+    40% {
+        inset: 1px;
     }
-    10% {
-        inset: 2px;
+    50% {
+        inset: 3px;
     }
-    20% {
-        inset: 0px;
+    60% {
+        inset: 1px;
     }
 }
 

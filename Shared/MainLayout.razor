@@ -15,7 +15,7 @@
             {
                 @for (int j = 0; j < columns; j++)
                 {
-                    string animDelay = $"{(i+j) * 250}ms";
+                    string animDelay = $"{(j) * 250}ms";
                     <div class="tile" style=" --animDelay: @animDelay;"></div>
                 }
             }
