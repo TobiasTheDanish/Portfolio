@@ -1,7 +1,7 @@
 ﻿[
   {
     "Name": "Pong in Processing",
-    "Description": "I recreated Pong in the java framework \"Processing\", as an early school project.\nThe game is made with a focus on applying OOP principles and basic programming skillsets.\nI created menus from scratch, as a way to challenge my creativity and coding skills.",
+    "Description": "I recreated Pong in the java framework \"Processing\", as an early school project.\nThe game is made with a focus on applying OOP principles and basic programming skillsets.\nI created the menus from scratch, because i didn't know of a prebuilt option in processing, and as a way to challenge my creativity and coding skills.\nThe gameplay follows the same pattern as the original game, but has a twist, in the way of a timer that appears if the players keep the ball going for 20 seconds, and then a second ball spawns. With up to 5 balls active at a time.",
     "Tags": [
       "Java",
       "Processing",
