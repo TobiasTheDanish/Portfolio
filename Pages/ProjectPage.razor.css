@@ -11,11 +11,13 @@
     width: max-content;
     height: max-content;
     grid-template-columns: 1fr 20vw;
-    grid-template-rows: 12vh 1fr;
+    grid-template-rows: 12vh 1fr 1fr;
     grid-template-areas:
         "title title"
-        "desc tags";
+        "desc tags"
+        "img img";
     grid-column-gap: 0.5vmin;
+    grid-row-gap: 0.5vmin;
     padding: 0.5vmin;
     padding-top: 0;
     background-color: var(--borderColor);
@@ -23,7 +25,8 @@
 
 .title,
 .description,
-.tags {
+.tags,
+.img-container {
     background-color: hsl(270 47% 9%);
     background-image: radial-gradient( rgba(255, 255, 255, 0.15) 4%, transparent 8% );
     background-position: 0% 0%;
@@ -40,16 +43,18 @@
 }
 
 .title-bg {
-    position: sticky;
+    position: absolute;
     top: 0.5vmin;
     grid-area: title;
+    width: 100%;
     height: 100%;
     z-index: 1;
     background-color: var(--borderColor);
 }
 
 .title {
-    height: calc(100% - 1vmin);
+    position: relative;
+    height: calc(100% - 0.5vmin);
     width: 100%;
     font-size: 5.5vmin;
     align-self: center;
@@ -57,7 +62,6 @@
     text-align: center;
     background-color: hsl(270 47% 9%);
     z-index: 2;
-    margin: 0.5vmin 0;
 }
 
 .description {
@@ -92,7 +96,6 @@
 }
 
 .tags {
-    position: sticky; top: 20px;
     grid-area: tags;
     display: flex;
     align-items: center;
@@ -102,6 +105,7 @@
 }
 
 .tag {
+    
     display: flex;
     width: fit-content;
     min-width: 50px;
@@ -116,23 +120,10 @@
     margin: 0.5rem;
 }
 
-/*For testing the border effect*/
-.gradient-bg {
-    --bgg1: rgb(98, 0, 234);
-    --bgg2: rgb(206, 34, 92);
-    animation: background-pan 10s linear infinite;
-    background: linear-gradient(to right, var(--bgg1), var(--bgg2), var(--bgg1));
-    background-size: 200%;
-}
-
-@keyframes background-pan {
-    from {
-        background-position: 0% center;
-    }
-
-    to {
-        background-position: 200% center;
-    }
+.img-container{
+    display: flex;
+    flex-direction: column;
+    grid-area: img;
 }
 
 @media (max-width: 500px) {
@@ -157,5 +148,25 @@
 
     .description{
         width: 80vw;
+    }
+}
+
+
+/*For testing the border effect*/
+.gradient-bg {
+    --bgg1: rgb(98, 0, 234);
+    --bgg2: rgb(206, 34, 92);
+    animation: background-pan 10s linear infinite;
+    background: linear-gradient(to right, var(--bgg1), var(--bgg2), var(--bgg1));
+    background-size: 200%;
+}
+
+@keyframes background-pan {
+    from {
+        background-position: 0% center;
+    }
+
+    to {
+        background-position: 200% center;
     }
 }

@@ -4,7 +4,7 @@
 @inject HttpClient client
 
 <div class="content-wrapper ">
-    <div class="title-bg ">
+    <div class="title-bg">
         <h3 class="title">@Project?.Name</h3>
     </div>
     <div class="tags">
@@ -26,6 +26,13 @@
             </div>
         }
     </p>
+    <div class="img-container">
+        @for (int i = 0; i < Project?.Images?.Length; i++)
+        {
+            string imgpath = $"{Project.Images[i]}";
+            <img class="item-img" src="~/data/projectImages/@imgpath"/>
+        }
+    </div>
 </div>
 
 @code {
